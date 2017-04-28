@@ -26,5 +26,16 @@
       '#element_validate' => array('element_validate_number', 'element_validate_integer_positive', 'element_validate_range'),
       '#required' => TRUE,
     );
+    $form['shift_direction'] = array(
+      '#title' => 'Right or Left?',
+      '#type' => 'textfield',
+      '#description' => t('Enter either "right" or "left" to tell the cipher which direction in the alphabet to shift.'),
+      '#element_validate' => array('element_validate_direction'),
+      '#required' => TRUE,
+    );
+    $form['submit'] = array(
+      '#type' => 'submit',
+      '#value' => 'Encrypt Now!',
+    );
     return $form;
   }
