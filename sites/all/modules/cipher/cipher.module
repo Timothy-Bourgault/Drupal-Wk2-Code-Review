@@ -49,7 +49,7 @@ function phrase_validate($element) {
 }
 
 function element_validate_range($element) {
-  if ($element['value'] < 1 || $element['value'] > 25) {
+  if ($element['#value'] < 1 || $element['#value'] > 25) {
     form_error($element, t('Please enter a shift amount between 1-25!'));
   }
 }
