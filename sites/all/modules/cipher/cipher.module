@@ -8,6 +8,12 @@
       'access callback' => TRUE,
       'type' => MENU_NORMAL_ITEM,
     );
+    $items['cipher_result'] = array(
+      'title' => 'Here is your ciphered phrase:',
+      'page callback' => 'cipher_result',
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+    );
     return $items;
   }
 
@@ -82,11 +88,11 @@ function cipher_form_submit($form, &$form_state) {
         while ($moved_place > 25) {
           $moved_place = $moved_place - 26;
         }
-      } elesif($shift_direction === 'left') {
+      } elseif($shift_direction === 'left') {
           $moved_place = $place - $shift_amount;
           while($moved_place < 0) {
-          $moved_place = 26 - abs($moved_place);
-        }
+            $moved_place = 26 - abs($moved_place);
+          }
       }
       if(preg_match("/[a-z]/", $character)) {
         array_push($new_array, $alphabet[$moved_place]);
@@ -95,9 +101,14 @@ function cipher_form_submit($form, &$form_state) {
       }
       $new_word = implode('', $new_array);
     }
-    array_push($encrypted_phrase, $new_word);
+    array_push($ciphered_phrase, $new_word);
   }
-  $cipher_result = implode(' ', $encrypted_phrase);
+  $cipher_result = implode(' ', $ciphered_phrase);
   $_SESSION['cipher_result'] = $cipher_result;
   $form_state['redirect'] = 'cipher_result';
+}
+
+function cipher_result() {
+  $cipher = $_SESSION['cipher_result'];
+  return "<h1>'$cipher'</h1>";
 }
