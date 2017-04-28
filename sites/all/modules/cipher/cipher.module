@@ -77,13 +77,27 @@ function cipher_form_submit($form, &$form_state) {
     $new_array = array();
     foreach($characters as $character) {
       $place = array_search($character, $alphabet);
-      if($direction === 'right') {
+      if($shift_direction === 'right') {
         $moved_place = $place + $shift_amount;
         while ($moved_place > 25) {
           $moved_place = $moved_place - 26;
         }
+      } elesif($shift_direction === 'left') {
+          $moved_place = $place - $shift_amount;
+          while($moved_place < 0) {
+          $moved_place = 26 - abs($moved_place);
+        }
       }
+      if(preg_match("/[a-z]/", $character)) {
+        array_push($new_array, $alphabet[$moved_place]);
+      } else {
+          array_push($new_array, $character);
+      }
+      $new_word = implode('', $new_array);
     }
+    array_push($encrypted_phrase, $new_word);
   }
-
+  $cipher_result = implode(' ', $encrypted_phrase);
+  $_SESSION['cipher_result'] = $cipher_result;
+  $form_state['redirect'] = 'cipher_result';
 }
