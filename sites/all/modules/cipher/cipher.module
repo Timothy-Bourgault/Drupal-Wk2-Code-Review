@@ -19,4 +19,12 @@
       '#element_validate' => array('phrase_validate'),
       '#required' => TRUE,
     );
+    $form['shift_amount'] = array(
+      '#title' => 'Shift Amount:',
+      '#type' => 'textfield',
+      '#description' => t('Please enter a number between 1-25.'),
+      '#element_validate' => array('element_validate_number', 'element_validate_integer_positive', 'element_validate_range'),
+      '#required' => TRUE,
+    );
+    return $form;
   }
