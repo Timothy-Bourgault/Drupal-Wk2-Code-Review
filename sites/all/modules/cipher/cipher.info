@@ -1,0 +1,5 @@
+name = Cipher
+description = Will encrypt a phrase that a user enters.
+package = Custom
+core = 7.x
+files[] = cipher.module
