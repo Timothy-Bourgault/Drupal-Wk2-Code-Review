@@ -39,3 +39,23 @@
     );
     return $form;
   }
+
+function phrase_validate($element) {
+  $input_phrase = $element['#value'];
+  $valid_characters = preg_match_all('/[a-zA-Z ,.!:;\'\"]/', $input_phrase);
+  if($valid_characters != strlen($input_phrase)) {
+    form_error($element, t('There were improper characters used in your phrase... Please try again!'));
+  }
+}
+
+function element_validate_range($element) {
+  if ($element['value'] < 1 || $element['value'] > 25) {
+    form_error($element, t('Please enter a shift amount between 1-25!'));
+  }
+}
+
+function element_validate_direction($element) {
+  if ($element['#value'] != 'left' && $element['#value'] != 'right') {
+    form_error($element, t('Please enter only either "right" or "left" for the shift direction.'));
+  }
+}
