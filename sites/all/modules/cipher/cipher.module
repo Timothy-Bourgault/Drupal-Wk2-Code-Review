@@ -59,3 +59,31 @@ function element_validate_direction($element) {
     form_error($element, t('Please enter only either "right" or "left" for the shift direction.'));
   }
 }
+
+function cipher_form_submit($form, &$form_state) {
+  $input_phrase = str_split(strtolower($form_state['values']['phrase']));
+  $shift_amount = intval($form_state['values']['shift_amount']);
+  $shift_direction = strtolower($form_state['values']['shift_direction']);
+  $alphabet = array(
+  'a','b','c','d','e','f',
+  'g','h','i','j','k','l',
+  'm','n','o','p','q','r',
+  's','t','u','v','w','x',
+  'y','z');
+  $ciphered_phrase = array();
+  foreach($input_phrase as $word) {
+    $characters = str_split($word);
+    $new_word = "";
+    $new_array = array();
+    foreach($characters as $character) {
+      $place = array_search($character, $alphabet);
+      if($direction === 'right') {
+        $moved_place = $place + $shift_amount;
+        while ($moved_place > 25) {
+          $moved_place = $moved_place - 26;
+        }
+      }
+    }
+  }
+
+}
